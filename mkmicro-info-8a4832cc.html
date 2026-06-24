@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mk体育 · 信息卡片页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f2f4f7;
+      padding: 2.4rem 1.2rem;
+      color: #1e2a3a;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* Hero 主视觉卡片 */
+    .hero-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 3.2rem 2.4rem;
+      margin-bottom: 2.4rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      border: 1px solid #eaeef2;
+      text-align: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #eef3f8;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      color: #3f5e78;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-sub {
+      color: #4f6a83;
+      font-size: 1rem;
+      max-width: 680px;
+      margin: 0 auto 1.6rem auto;
+    }
+
+    .hero-link-sentence {
+      background: #f7f9fc;
+      display: inline-block;
+      padding: 0.5rem 1.6rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      border: 1px solid #dce3ea;
+    }
+
+    .hero-link-sentence a {
+      color: #1b3b58;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dashed #8ba6c1;
+    }
+
+    .hero-link-sentence a:hover {
+      border-bottom-color: #1b3b58;
+    }
+
+    /* 用途卡片区 */
+    .section-label {
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #7c8f9e;
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+      padding-left: 0.2rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.6rem;
+      margin-bottom: 2.6rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.4rem;
+      border: 1px solid #e5eaef;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      transition: box-shadow 0.2s ease, transform 0.1s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+      display: block;
+      opacity: 0.8;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #152b39;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #3d556b;
+    }
+
+    .card a {
+      color: #1b3b58;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-thickness: 0.5px;
+    }
+
+    /* 适合人群 + 自然段落混合 */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2.4rem;
+    }
+
+    @media (max-width: 680px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.6rem;
+      border: 1px solid #e5eaef;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .info-card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-left: 4px solid #b3c9db;
+      padding-left: 0.8rem;
+    }
+
+    .info-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-card li {
+      padding: 0.35rem 0;
+      font-size: 0.95rem;
+      color: #2e4559;
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+
+    .info-card li::before {
+      content: "—";
+      color: #8aa3b9;
+      margin-right: 0.2rem;
+    }
+
+    .text-block p {
+      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+    }
+
+    .text-block a {
+      color: #1b3b58;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: #b3c9db;
+    }
+
+    .text-block a:hover {
+      text-decoration-color: #1b3b58;
+    }
+
+    /* 提示 / 摘要卡片 */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.8rem 2rem;
+      margin-bottom: 2rem;
+      border: 1px solid #e5eaef;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-mini h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #1f384c;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .faq-mini p {
+      font-size: 0.95rem;
+      color: #3d576e;
+      margin-bottom: 0.6rem;
+    }
+
+    .faq-mini p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-mini strong {
+      font-weight: 600;
+      color: #152b39;
+    }
+
+    hr {
+      border: 0;
+      height: 1px;
+      background: #dce3ea;
+      margin: 2rem 0 1.2rem 0;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #7f95a9;
+      border-top: 1px solid #dce3ea;
+      padding-top: 1.6rem;
+      margin-top: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Hero 主视觉卡片 -->
+    <div class="hero-card">
+      <span class="hero-tag">⚡ 信息卡片式 · 稳定入口</span>
+      <div class="hero-title">mk体育 · 作为页面说明</div>
+      <p class="hero-sub">
+        这里并非一个跳转入口，而是一份安静的介绍。如果你已经听说过 <a href="https://mkmicro.com.cn" style="color:#1b3b58;font-weight:600;text-decoration:underline;text-underline-offset:2px;">mk体育</a> 这个名字，或许下面的卡片能帮你更清晰地理解它的用途与氛围。
+      </p>
+      <div class="hero-link-sentence">
+        在你需要时，可以直接去 <a href="https://mkmicro.com.cn">mk体育</a> 了解更多。
+      </div>
+    </div>
+
+    <!-- 用途卡片区 -->
+    <div class="section-label">📌 几组用途卡片</div>
+    <div class="card-grid">
+      <div class="card">
+        <span class="card-icon">📋</span>
+        <h3>信息聚合</h3>
+        <p>将分散的体育相关内容归拢到一处，省去反复查找的麻烦。适合日常浏览与简单查阅。</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔗</span>
+        <h3>稳定访问</h3>
+        <p>指向 <a href="https://mkmicro.com.cn">mk体育</a> 的链接保持简洁直接，减少中间跳转，页面本身也作为说明页存在。</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🧩</span>
+        <h3>场景适配</h3>
+        <p>不论是快速浏览还是稍作停留，卡片式布局让内容层次更清晰，适合多种使用习惯。</p>
+      </div>
+    </div>
+
+    <!-- 两列：适合人群 + 自然段落 -->
+    <div class="two-col">
+      <div class="info-card">
+        <h2>适合什么样的人</h2>
+        <ul>
+          <li>对体育信息有日常阅读习惯的人</li>
+          <li>希望避开复杂导航、直接看到内容摘要的人</li>
+          <li>已经在使用或听说过 <a href="https://mkmicro.com.cn">mk体育</a>，需要一个简洁说明页的人</li>
+          <li>喜欢浅色、卡片式界面，不追求过度装饰的浏览者</li>
+        </ul>
+      </div>
+      <div class="info-card text-block">
+        <h2>一段自然说明</h2>
+        <p>很多网站的第一页总想告诉用户“你应该做什么”，但这里更倾向于先描述自己。这个页面本身就是一个安静的说明页——它不催促，也不夸大。</p>
+        <p>如果你对 <a href="https://mkmicro.com.cn">mk体育</a> 感兴趣，可以把它当作一个起点。卡片里的内容只是一些概括，更多细节还是留给网站本身去呈现。</p>
+        <p>稳定入口的意义在于：当你需要的时候，它就在那里，不喧哗，也不难找。</p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="faq-mini">
+      <h3>❓ 一点摘要 · 常见问题式</h3>
+      <p><strong>这个页面是做什么的？</strong> 一个围绕 mk体育 的介绍页，采用信息卡片式结构，用浅灰背景、细边框和柔和阴影来区分内容模块。</p>
+      <p><strong>链接在哪里？</strong> 上文已经出现了几次指向 <a href="https://mkmicro.com.cn">mk体育</a> 的文字，它们被自然地嵌在句子里，你可以根据上下文判断是否需要进一步浏览。</p>
+      <p><strong>内容真实吗？</strong> 是的，这里没有夸张措辞或诱导性表述，只是如实说明页面的定位与结构。</p>
+    </div>
+
+    <hr>
+    <div class="footer-note">
+      mk体育 · 信息卡片式说明页 · 稳定入口 · 页面方向由创作种子动态变化
+    </div>
+  </div>
+</body>
+</html>
