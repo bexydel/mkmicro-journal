@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ng28 · 信息卡片介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fce3c9 0%, #f8d0b0 40%, #f3be96 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.2rem;
+            line-height: 1.7;
+            color: #3b2b1f;
+        }
+
+        .cards-wrapper {
+            max-width: 1080px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Hero 卡片 — 主视觉 */
+        .hero-card {
+            background: rgba(255, 249, 241, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 3rem 1.5rem 3rem 1.5rem;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 40px -12px rgba(160, 90, 40, 0.25),
+                        0 8px 16px -6px rgba(120, 60, 20, 0.15);
+            border: 1px solid rgba(255, 215, 175, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: #633d26;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-title .accent {
+            background: #dba37b;
+            color: #fef5ea;
+            font-weight: 500;
+            padding: 0.1rem 1rem;
+            border-radius: 40px;
+            font-size: 2.2rem;
+            display: inline-block;
+            box-shadow: 0 2px 6px #c2825a66;
+        }
+
+        .hero-sub {
+            font-size: 1.15rem;
+            color: #5f4634;
+            max-width: 70%;
+            background: #edcfb6b3;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            display: inline-block;
+            margin-top: 0.5rem;
+            backdrop-filter: blur(2px);
+            border: 1px solid #f2d9c2;
+        }
+
+        .hero-description {
+            margin-top: 1.8rem;
+            font-size: 1.1rem;
+            color: #4f3827;
+            padding-right: 1rem;
+        }
+
+        /* 通用卡片样式 */
+        .card {
+            background: #fffbf7;
+            border-radius: 2.4rem 1.2rem 2.4rem 1.2rem;
+            padding: 2.2rem 2.5rem;
+            box-shadow: 0 12px 28px -12px rgba(130, 70, 30, 0.18),
+                        0 4px 12px rgba(200, 140, 90, 0.08);
+            border: 1px solid #fae7d6;
+            transition: transform 0.15s, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 36px -14px #9b6d4e4d;
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 380;
+            color: #583f2b;
+            border-left: 6px solid #da9d74;
+            padding-left: 1.3rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .card-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem 2.5rem;
+        }
+
+        .feature-item {
+            flex: 1 1 200px;
+            background: #fdf3ea;
+            padding: 1.2rem 1.5rem;
+            border-radius: 2rem 0.8rem 2rem 0.8rem;
+            border: 1px solid #f5ddca;
+            box-shadow: inset 0 1px 4px #fff4e9, 0 2px 6px #eacbb2;
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            font-weight: 480;
+            color: #714d34;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-item p {
+            color: #4a3729;
+            font-size: 0.98rem;
+        }
+
+        .audience-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.8rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .audience-tag {
+            background: #ebd3be;
+            padding: 0.3rem 1.4rem;
+            border-radius: 60px;
+            font-size: 0.98rem;
+            color: #3b2a1c;
+            border: 1px solid #ddbc9f;
+            box-shadow: 0 1px 4px #f1d1b9;
+        }
+
+        .link-sentence {
+            margin-top: 2rem;
+            background: #f0ddcd;
+            padding: 1rem 2rem;
+            border-radius: 80px 20px 80px 20px;
+            font-size: 1.1rem;
+            color: #3d2b1b;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+            border: 1px solid #f1d0b4;
+        }
+
+        .link-sentence a {
+            color: #513521;
+            background: #f5e6d9;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.05rem 0.8rem;
+            border-radius: 40px;
+            border: 1px solid #c4926d;
+            transition: background 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .link-sentence a:hover {
+            background: #dbaa83;
+            color: #fef2e4;
+            border-color: #a16f4b;
+            box-shadow: 0 2px 8px #b07d5b66;
+        }
+
+        .faq-mini {
+            background: #f8ede2;
+            border-radius: 1.8rem;
+            padding: 1.2rem 1.8rem;
+            margin-top: 1.2rem;
+            border-left: 8px solid #d4946b;
+        }
+
+        .faq-mini p {
+            margin: 0.5rem 0;
+            color: #4b3625;
+        }
+
+        .faq-mini strong {
+            color: #6a462e;
+            font-weight: 500;
+        }
+
+        .footnote {
+            text-align: center;
+            margin-top: 1rem;
+            color: #4c3a2b;
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            body {
+                padding: 1.5rem 0.8rem;
+            }
+            .hero-card {
+                padding: 2rem 1.5rem;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-title .accent {
+                font-size: 1.8rem;
+            }
+            .hero-sub {
+                max-width: 100%;
+                font-size: 0.95rem;
+                padding: 0.3rem 1.2rem;
+            }
+            .card {
+                padding: 1.6rem 1.3rem;
+            }
+            .card-title {
+                font-size: 1.4rem;
+                padding-left: 0.9rem;
+            }
+            .feature-item {
+                flex: 1 1 100%;
+            }
+            .link-sentence {
+                padding: 0.8rem 1.2rem;
+                font-size: 1rem;
+                border-radius: 50px 12px 50px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.7rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .hero-title .accent {
+                font-size: 1.5rem;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cards-wrapper">
+        <!-- 主视觉 Hero 卡片 -->
+        <div class="hero-card">
+            <div class="hero-title">
+                <span>关于</span>
+                <span class="accent">ng28</span>
+                <span style="font-weight:300; margin-left: 0.4rem; color:#7a5b43;">· 信息探索</span>
+            </div>
+            <div class="hero-sub">✦ 从关键词到内容脉络</div>
+            <div class="hero-description">
+                每一个标识背后都可能承载着某种表达、工具或社群。<strong>ng28</strong> 也是这样一个简短的字符组合，它可能是项目代号、版本标签或特定场景下的指称。我们无意过度解读，而是围绕它组织一些温和、有启发的信息卡片，帮助你快速理解可能的上下文。
+            </div>
+        </div>
+
+        <!-- 用途卡片：内容特点 -->
+        <div class="card">
+            <div class="card-title">📋 可能的用途方向</div>
+            <div class="card-content">
+                <div class="feature-item">
+                    <h3>📌 命名 / 标签</h3>
+                    <p>作为内部项目、实验版本或分类标识，简洁且不易混淆。常见于技术原型、文档代号或短期任务。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>🧩 社区 / 话题</h3>
+                    <p>在讨论、分享或协作中作为简短关键词，方便检索与组织内容。部分社群会使用类似短码代表特定主题。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>⚙️ 配置 / 参数</h3>
+                    <p>在系统配置、试验环境或自定义设置里作为占位或区分值，灵活且不易与其他值冲突。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 适合人群 + 自然链接段落 合并卡片 -->
+        <div class="card">
+            <div class="card-title">👥 适合怎样的人</div>
+            <div class="audience-grid">
+                <span class="audience-tag">好奇的内容浏览者</span>
+                <span class="audience-tag">轻度的技术尝鲜者</span>
+                <span class="audience-tag">习惯于用关键词检索的人</span>
+                <span class="audience-tag">喜欢干净信息卡片的朋友</span>
+                <span class="audience-tag">对简短代号有兴趣的观察者</span>
+            </div>
+            <div class="faq-mini">
+                <p><strong>❓ 常见疑问摘要</strong> — 这个页面是关于什么的？</p>
+                <p>这里没有复杂营销，只是围绕 <strong>ng28</strong> 构建了一组自然、克制的介绍视角。你可以把它当作一个信息起点。</p>
+                <p><strong>🔍 为什么关注这个关键词？</strong> 短关键词往往能承载多种上下文，我们呈现其中一些温和的可能性，不夸大也不诱导。</p>
+            </div>
+
+            <!-- 自然链接段落，a标签可见文本 = ng28 -->
+            <div class="link-sentence">
+                如果你希望进一步了解这个短标识背后的内容，可以前往 <a href="https://ssl-cn-ng28.com">ng28</a> 阅读更多说明。
+            </div>
+            <div style="margin-top:1rem; font-size:0.95rem; color:#5f4633; background: #f7ebe1; border-radius: 40px; padding:0.4rem 1.8rem; display:inline-block;">
+                ☕ 所有信息仅供参考，请根据自身判断使用。
+            </div>
+        </div>
+
+        <!-- 提示 + 额外卡片 -->
+        <div class="card" style="background: #fffaf3;">
+            <div class="card-title">🌱 温和提醒</div>
+            <p style="margin-bottom:1rem; color:#4e3826;">网络信息纷杂，保持独立思考。无论你是因为什么注意到 <strong>ng28</strong>，都建议通过多方信源交叉了解。这个页面仅从卡片式介绍的角度提供一种可能的叙事。</p>
+            <div style="display:flex; flex-wrap:wrap; gap:0.8rem; margin-top:1rem;">
+                <span style="background: #e9d4c0; padding:0.2rem 1.2rem; border-radius: 50px; font-size:0.9rem;">✔ 不构成任何建议</span>
+                <span style="background: #e9d4c0; padding:0.2rem 1.2rem; border-radius: 50px; font-size:0.9rem;">✔ 非官方页面</span>
+                <span style="background: #e9d4c0; padding:0.2rem 1.2rem; border-radius: 50px; font-size:0.9rem;">✔ 内容方向：信息卡片</span>
+            </div>
+        </div>
+
+        <div class="footnote">
+            ✦ 页面基于开放视角构建 ·  warm card style
+        </div>
+    </div>
+</body>
+</html>
